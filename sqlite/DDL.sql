@@ -1,0 +1,54 @@
+CREATE TABLE Book (
+	bookID INTEGER PRIMARY KEY AUTOINCREMENT,
+	tittle TEXT NOT NULL,
+	description TEXT,
+	published TEXT,
+	categories TEXT,
+	cover TEXT,
+	pages INTEGER,
+	isbn TEXT UNIQUE
+);
+
+CREATE TABLE Writer (
+	writerID INTEGER PRIMARY KEY AUTOINCREMENT,
+	name TEXT NOT NULL
+);
+
+CREATE TABLE Book_Writer (
+	bookID INTEGER NOT NULL,
+	writerID INTEGER NOT NULL,
+	PRIMARY KEY(bookID, writerID),
+	FOREIGN KEY (bookID) REFERENCES Book(bookID),
+	FOREIGN KEY (writerID) REFERENCES Writer(writerID)
+);
+
+CREATE TABLE Shelves (
+	shelvesID INTEGER PRIMARY KEY AUTOINCREMENT,
+	name TEXT NOT NULL UNIQUE
+);
+
+CREATE TABLE Book_Shelves (
+	bookID INTEGER NOT NULL,
+	shelvesID INTEGER NOT NULL,
+	PRIMARY KEY (bookID, shelvesID),
+	FOREIGN KEY (bookID) REFERENCES Book(bookID),
+	FOREIGN KEY (shelvesID) REFERENCES Shelves(shelvesID)
+);
+
+CREATE TABLE BookStatus (
+	bookID INTEGER PRIMARY KEY,
+	progress INTEGER,
+	status TEXT NOT NULL,
+	rating INTEGER,
+	startDate TEXT,
+	endDate TEXT,
+	FOREIGN KEY (bookID) REFERENCES Book(bookID)
+);
+
+CREATE TABLE Notes (
+	notesID INTEGER PRIMARY KEY AUTOINCREMENT,
+	text TEXT,
+	createdDate TEXT,
+	bookID INTEGER NOT NULL,
+	FOREIGN KEY (bookID) REFERENCES Book(bookID)
+);

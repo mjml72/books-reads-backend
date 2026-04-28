@@ -1,0 +1,16 @@
+MODELO RELACIONAL
+
+LIBRO (LibroID(PK), Titulo NOT NULL, description, cover, pageCount, ISBN(Unique))
+
+ESCRITOR (EscritorID(PK), Nombre)
+
+Libro_Escritor ((LibroID(FK) NOT NULL, EscritorID(FK) NOT NULL)(PK))
+
+SHELVES (ShelvesID(PK), Nombre(UNIQUE))
+
+Libro_Shelves ((LibroID(FK) NOT NULL, ShelvesID(FK) NOT NULL)(PK))
+
+BookStatus (LibroID(PK)(FK), progress, status, rating, start, end)
+
+Notas (NotasID(PK), texto, LibroID(FK) NOT NULL, createdAt)
+
