@@ -1,4 +1,4 @@
-CREATE TABLE Book (
+CREATE TABLE Books (
 	bookID INTEGER PRIMARY KEY AUTOINCREMENT,
 	tittle TEXT NOT NULL,
 	description TEXT,
@@ -9,12 +9,12 @@ CREATE TABLE Book (
 	isbn TEXT UNIQUE
 );
 
-CREATE TABLE Writer (
+CREATE TABLE Writers (
 	writerID INTEGER PRIMARY KEY AUTOINCREMENT,
 	name TEXT NOT NULL
 );
 
-CREATE TABLE Book_Writer (
+CREATE TABLE Books_Writers (
 	bookID INTEGER NOT NULL,
 	writerID INTEGER NOT NULL,
 	PRIMARY KEY(bookID, writerID),
@@ -27,7 +27,7 @@ CREATE TABLE Shelves (
 	name TEXT NOT NULL UNIQUE
 );
 
-CREATE TABLE Book_Shelves (
+CREATE TABLE Books_Shelves (
 	bookID INTEGER NOT NULL,
 	shelvesID INTEGER NOT NULL,
 	PRIMARY KEY (bookID, shelvesID),
