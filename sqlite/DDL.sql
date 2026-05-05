@@ -40,15 +40,15 @@ CREATE TABLE BookStatus (
 	progress INTEGER,
 	status TEXT NOT NULL,
 	rating INTEGER,
-	startDate TEXT,
-	endDate TEXT,
+	startReading TEXT,
+	endReading TEXT,
 	FOREIGN KEY (bookID) REFERENCES Book(bookID)
 );
 
 CREATE TABLE Notes (
 	notesID INTEGER PRIMARY KEY AUTOINCREMENT,
 	text TEXT,
-	createdDate TEXT,
+	created TEXT,
 	bookID INTEGER NOT NULL,
 	FOREIGN KEY (bookID) REFERENCES Book(bookID)
 );
