@@ -2,31 +2,37 @@ import { dbConfiguration } from './src/config/db.js';
 
 const db = await dbConfiguration();
 
+
 export const ShelvesModel = {
-  findAll: () => {
-    return db.all('SELECT * FROM Shelves');
+  findAll: async () => {
+    return await db.all('SELECT * FROM Shelves');
   },
 
-  findById: (id) => {
-    return db.get('SELECT * FROM Shelves WHERE shelvesID = ?', [id]);
+  findById: async (id) => {
+    return await db.get('SELECT * FROM Shelves WHERE shelvesID = ?', [id]);
   },
 
-  create: ( name ) => {
-    return db.run(
+  findByName: async (name) => {
+    let search = `%${name}%`;
+    return await db.get('SELECT * FROM Shelves WHERE name = ? OR name LIKE ?', [name, search]);
+  },
+
+  create: async (name) => {
+    return await db.run(
       `INSERT INTO Shelves (name)
        VALUES (?)`
       [name]
     );
   },
 
-  update: (id, name ) => {
-    return db.run(
+  update: async (id, name) => {
+    return await db.run(
       `UPDATE Shelves SET name = ? WHERE shelvesID = ?`,
       [name, id]
     );
   },
 
-  delete: (id) => {
-    return db.run('DELETE FROM Shelves WHERE shelvesID = ?', [id]);
+  delete: async (id) => {
+    return await db.run('DELETE FROM Shelves WHERE shelvesID = ?', [id]);
   }
 };

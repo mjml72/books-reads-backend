@@ -4,31 +4,38 @@ const db = await dbConfiguration();
 
 
 export const BooksModel = {
-  findAll: () => {
-    return db.all('SELECT * FROM Books');
+  findAll: async () => {
+    return await db.all('SELECT * FROM Books');
   },
 
-  findById: (id) => {
-    return db.get('SELECT * FROM Books WHERE bookID = ?', [id]);
+  findById: async (id) => {
+    return await db.get('SELECT * FROM Books WHERE bookID = ?', [id]);
   },
 
-  create: (title, description, published, categories, cover, pages, isbn) => {
-    return db.run(
+  findByTitle: async (title) => {
+    let search = `%${title}%`
+    return await db.get('SELECT * FROM Books WHERE title = ? OR title LIKE ?', [title, search]);
+  },
+
+  create: async (data) => {
+    const {title, description, published, categories, cover, pages, isbn} = data;
+    return await db.run(
       `INSERT INTO Books (title, description, published, categories, cover, pages, isbn)
        VALUES (?, ?, ?, ?, ?, ?, ?)`
       [title, description, published, categories, cover, pages, isbn]
     );
   },
 
-  update: (id, title, description, published, categories, cover, pages, isbn) => {
-    return db.run(
+  update: async (id, data) => {
+    const {title, description, published, categories, cover, pages, isbn} = data;
+    return await db.run(
       `UPDATE Books SET title = ?, description = ?, published = ?, categories = ?, cover = ?,
        pages = ?, isbn = ? WHERE bookID = ?`,
       [title, description, published, categories, cover, pages, isbn, id]
     );
   },
 
-  delete: (id) => {
-    return db.run('DELETE FROM Books WHERE bookID = ?', [id]);
+  delete: async (id) => {
+    return await db.run('DELETE FROM Books WHERE bookID = ?', [id]);
   }
 };

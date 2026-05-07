@@ -1,10 +1,10 @@
-import { BooksWritersModel } from '../models/books-writers.model.js';
+import { BooksShelvesModel } from '../models/books-shelves.model.js';
 
 
-export const BooksWritersController = {
+export const BooksShelvesController = {
   findAll: async (req, res) => {
     try {
-      const response = await BooksWritersModel.findAll();
+      const response = await BooksShelvesModel.findAll();
       res.status(200).json(response);
 
     } catch (error) {
@@ -15,9 +15,9 @@ export const BooksWritersController = {
   findByBookId: async (req, res) => {
     try {
       const { bookId } = req.params;
-      const response = await BooksWritersModel.findByBookId(id);
+      const response = await BooksShelvesModel.findByBookId(id);
 
-      if (!response) return res.status(404).json({ error: 'Book not found' });
+      if (!response) return res.status(404).json({ error: 'shelve not found' });
       res.json(response);
 
     } catch (error) {
@@ -25,12 +25,12 @@ export const BooksWritersController = {
     }
   },
 
-  findByWriterId: async (req, res) => {
+  findByShelveId: async (req, res) => {
     try {
       const { id } = req.params;
-      const response = await BooksWritersModel.findByWriterId(id);
+      const response = await BooksShelvesModel.findByShelveId(id);
 
-      if (!response) return res.status(404).json({ error: 'Book not found' });
+      if (!response) return res.status(404).json({ error: 'shelve not found' });
       res.json(response);
 
     } catch (error) {
@@ -40,8 +40,8 @@ export const BooksWritersController = {
 
   create: async (req, res) => {
     try {
-      const {bookID, writerID} = req.body;
-      const created = await BooksWritersModel.create(bookID, writerID);
+      const {bookID, shelvesID} = req.body;
+      const created = await BooksShelvesModel.create(bookID, shelvesID);
       res.status(201).json(created);
     } catch (error) {
       res.status(400).json({ error: err.message });
@@ -51,8 +51,8 @@ export const BooksWritersController = {
   update: async (req, res) => {
     try {
       
-      const {bookID, writerID} = req.body; 
-      const updated = await BooksWritersModel.update(bookID, writerID);
+      const {bookID, shelvesID} = req.body; 
+      const updated = await BooksShelvesModel.update(bookID, shelvesID);
       res.status(200).json(updated);
       
     } catch (error) {
@@ -62,8 +62,8 @@ export const BooksWritersController = {
 
   delete: async (req, res) => {
     try {
-      const {bookId, writerId} = req.params;
-      await BooksWritersModel.delete(bookID, writerID);
+      const {bookId, shelvesId} = req.params;
+      await BooksShelvesModel.delete(bookID, shelvesID);
       res.json({ message: 'Relacion eliminado' });
       
     } catch (error) {

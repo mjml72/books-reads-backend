@@ -3,30 +3,32 @@ import { dbConfiguration } from './src/config/db.js';
 const db = await dbConfiguration();
 
 export const BookStatusModel = {
-  findAll: () => {
-    return db.all('SELECT * FROM BookStatus');
+  findAll: async () => {
+    return await db.all('SELECT * FROM BookStatus');
   },
 
-  findById: (id) => {
-    return db.get('SELECT * FROM BookStatus WHERE bookID = ?', [id]);
+  findById: async (id) => {
+    return await db.get('SELECT * FROM BookStatus WHERE bookID = ?', [id]);
   },
 
-  create: (bookID, progress, status, rating, startReading, endReading) => {
-    return db.run(
+  create: async (data) => {
+    const {bookID, progress, status, rating, startReading, endReading}=data;
+    return await db.run(
       `INSERT INTO BookStatus (bookID, progress, status, rating, startReading, endReading)
        VALUES (?, ?, ?, ?, ?, ?)`
       [bookID, progress, status, rating, startReading, endReading]
     );
   },
 
-  update: (bookID, progress, status, rating, startReading, endReading ) => {
-    return db.run(
+  update: async ( data) => {
+    const {bookID, progress, status, rating, startReading, endReading}=data;
+    return await db.run(
       `UPDATE BookStatus SET progress = ?, status = ?, rating = ?, startReading = ?, endReading = ? WHERE bookID = ?`,
       [progress, status, rating, startReading, endReading, bookID]
     );
   },
 
-  delete: (id) => {
-    return db.run('DELETE FROM BookStatus WHERE bookID = ?', [id]);
+  delete: async (id) => {
+    return await db.run('DELETE FROM BookStatus WHERE bookID = ?', [id]);
   }
 };

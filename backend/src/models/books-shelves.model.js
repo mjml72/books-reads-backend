@@ -3,34 +3,34 @@ import { dbConfiguration } from './src/config/db.js';
 const db = await dbConfiguration();
 
 export const BooksShelvesModel = {
-  findAll: () => {
-    return db.all('SELECT * FROM Books_Shelves');
+  findAll: async () => {
+    return await db.all('SELECT * FROM Books_Shelves');
   },
 
-  findByBookId: (id) => {
-    return db.get('SELECT * FROM Books_Shelves WHERE bookID = ?', [id]);
+  findByBookId: async (id) => {
+    return await db.get('SELECT * FROM Books_Shelves WHERE bookID = ?', [id]);
   },
 
-  findByShelveId: (id) => {
-    return db.get('SELECT * FROM Books_Shelves WHERE shelvesID = ?', [id]);
+  findByShelveId: async (id) => {
+    return await db.get('SELECT * FROM Books_Shelves WHERE shelvesID = ?', [id]);
   },
 
-  create: (bookID, shelvesID) => {
-    return db.run(
+  create: async (bookID, shelvesID) => {
+    return await db.run(
       `INSERT INTO Books_Shelves (bookID, shelvesID)
        VALUES (?, ?)`
       [bookID, shelvesID]
     );
   },
 
-  update: (bookID, shelvesID) => {
-    return db.run(
+  update: async (bookID, shelvesID) => {
+    return await db.run(
       `UPDATE Books_Shelves SET bookID = ?, writerID = ? WHERE bookID = ? AND shelvesID = ?`,
       [bookID, shelvesID]
     );
   },
 
-  delete: (bookID, shelvesID) => {
-    return db.run('DELETE FROM Books_Shelves WHERE bookID = ? AND shelvesID = ?', [bookID, shelvesID]);
+  delete: async (bookID, shelvesID) => {
+    return await db.run('DELETE FROM Books_Shelves WHERE bookID = ? AND shelvesID = ?', [bookID, shelvesID]);
   }
 };
