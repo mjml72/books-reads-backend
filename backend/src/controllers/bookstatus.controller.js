@@ -12,37 +12,38 @@ export const BookStatusController = {
     }
   },
 
+
   findById: async (req, res) => {
     try {
       const { id } = req.params;
       const response = await BookStatusModel.findById(id);
 
-      if (!response) return res.status(404).json({ error: 'Book not found' });
+      if (!response) {
+        return res.status(404).json({ error: 'Book not found' });
+      }
       res.json(response);
 
     } catch (error) {
-      res.status(404).send(error.message);
+      res.status(500).send(error.message);
     }
   },
 
 
   create: async (req, res) => {
     try {
-      const data = req.body;
-      const created = await BookStatusModel.create(data);
-      res.status(201).json(created);
+      const response = await BookStatusModel.create(req.body);
+      res.status(201).json(response);
     } catch (error) {
-      res.status(400).json({ error: err.message });
+      res.status(500).json({ error: err.message });
     }
   },
 
   update: async (req, res) => {
     try {
-      const {id} = req.params;
-      const data = req.body; 
-      const updated = await BookStatusModel.update(id, data);
-      res.status(200).json(updated);
-      
+      const { id } = req.params;
+      const response = await BookStatusModel.update(id, req.body);
+      res.status(200).json(response);
+
     } catch (error) {
       res.status(500).send(error.message);
     }
@@ -50,12 +51,12 @@ export const BookStatusController = {
 
   delete: async (req, res) => {
     try {
-      const {id} = req.params;
+      const { id } = req.params;
       await BookStatusModel.delete(id);
       res.json({ message: 'Book eliminado' });
-      
+
     } catch (error) {
-      res.status(500).send(error.message);      
+      res.status(500).send(error.message);
     }
   }
 };

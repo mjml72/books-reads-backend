@@ -1,6 +1,6 @@
 CREATE TABLE Books (
 	bookID INTEGER PRIMARY KEY AUTOINCREMENT,
-	tittle TEXT NOT NULL,
+	title TEXT NOT NULL,
 	description TEXT,
 	published TEXT,
 	categories TEXT,
@@ -18,8 +18,8 @@ CREATE TABLE Books_Writers (
 	bookID INTEGER NOT NULL,
 	writerID INTEGER NOT NULL,
 	PRIMARY KEY(bookID, writerID),
-	FOREIGN KEY (bookID) REFERENCES Book(bookID),
-	FOREIGN KEY (writerID) REFERENCES Writer(writerID)
+	FOREIGN KEY (bookID) REFERENCES Books(bookID),
+	FOREIGN KEY (writerID) REFERENCES Writers(writerID)
 );
 
 CREATE TABLE Shelves (
@@ -31,7 +31,7 @@ CREATE TABLE Books_Shelves (
 	bookID INTEGER NOT NULL,
 	shelvesID INTEGER NOT NULL,
 	PRIMARY KEY (bookID, shelvesID),
-	FOREIGN KEY (bookID) REFERENCES Book(bookID),
+	FOREIGN KEY (bookID) REFERENCES Books(bookID),
 	FOREIGN KEY (shelvesID) REFERENCES Shelves(shelvesID)
 );
 
@@ -42,7 +42,7 @@ CREATE TABLE BookStatus (
 	rating INTEGER,
 	startReading TEXT,
 	endReading TEXT,
-	FOREIGN KEY (bookID) REFERENCES Book(bookID)
+	FOREIGN KEY (bookID) REFERENCES Books(bookID)
 );
 
 CREATE TABLE Notes (
@@ -50,5 +50,5 @@ CREATE TABLE Notes (
 	text TEXT,
 	created TEXT,
 	bookID INTEGER NOT NULL,
-	FOREIGN KEY (bookID) REFERENCES Book(bookID)
+	FOREIGN KEY (bookID) REFERENCES Books(bookID)
 );

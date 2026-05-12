@@ -1,4 +1,4 @@
-import { dbConfiguration } from './src/config/db.js';
+import { dbConfiguration } from '../config/db.js';
 
 const db = await dbConfiguration();
 
@@ -14,16 +14,16 @@ export const BookStatusModel = {
   create: async (data) => {
     const {bookID, progress, status, rating, startReading, endReading}=data;
     return await db.run(
-      `INSERT INTO BookStatus (bookID, progress, status, rating, startReading, endReading)
-       VALUES (?, ?, ?, ?, ?, ?)`
+      'INSERT INTO BookStatus (bookID, progress, status, rating, startReading, endReading) VALUES (?, ?, ?, ?, ?, ?)',
       [bookID, progress, status, rating, startReading, endReading]
     );
   },
 
-  update: async ( data) => {
+  
+  update: async (id, data) => {
     const {bookID, progress, status, rating, startReading, endReading}=data;
     return await db.run(
-      `UPDATE BookStatus SET progress = ?, status = ?, rating = ?, startReading = ?, endReading = ? WHERE bookID = ?`,
+      'UPDATE BookStatus SET progress = ?, status = ?, rating = ?, startReading = ?, endReading = ? WHERE bookID = ?',
       [progress, status, rating, startReading, endReading, bookID]
     );
   },

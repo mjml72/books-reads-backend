@@ -12,49 +12,54 @@ export const NotesController = {
     }
   },
 
+
   findById: async (req, res) => {
     try {
       const { id } = req.params;
       const response = await NotesModel.findById(id);
 
-      if (!response) return res.status(404).json({ error: 'Note not found' });
+      if (!response) {
+        return res.status(404).json({ error: 'Note not found' });
+      }
       res.json(response);
 
     } catch (error) {
-      res.status(404).send(error.message);
+      res.status(500).send(error.message);
     }
   },
 
   findByBookId: async (req, res) => {
     try {
       const { bookId } = req.params;
-      const response = await NotesModel.findByBookId(id);
+      const response = await NotesModel.findByBookId(bookId);
 
-      if (!response) return res.status(404).json({ error: 'Note not found' });
+      if (!response) {
+        return res.status(404).json({ error: 'Note not found' });
+      }
       res.json(response);
 
     } catch (error) {
-      res.status(404).send(error.message);
+      res.status(500).send(error.message);
     }
   },
 
   create: async (req, res) => {
     try {
-      const {text, created, bookID} = req.body;
-      const created = await NotesModel.create(text, created, bookID);
-      res.status(201).json(created);
+      const { text, created, bookID } = req.body;
+      const response = await NotesModel.create(text, created, bookID);
+      res.status(201).json(response);
     } catch (error) {
-      res.status(400).json({ error: err.message });
+      res.status(500).json({ error: err.message });
     }
   },
 
   update: async (req, res) => {
     try {
-      const {id} = req.params;
-      const {text, created, bookID} = req.body; 
-      const updated = await NotesModel.update(id, text, created, bookID);
-      res.status(200).json(updated);
-      
+      const { id } = req.params;
+      const { text, created, bookID } = req.body;
+      const response = await NotesModel.update(id, text, created, bookID);
+      res.status(200).json(response);
+
     } catch (error) {
       res.status(500).send(error.message);
     }
@@ -62,12 +67,12 @@ export const NotesController = {
 
   delete: async (req, res) => {
     try {
-      const {notesID, booksID} = req.params;
-      await NotesModel.delete(notesID, booksID);
+      const { id } = req.params;
+      await NotesModel.delete(id);
       res.json({ message: 'Note eliminado' });
-      
+
     } catch (error) {
-      res.status(500).send(error.message);      
+      res.status(500).send(error.message);
     }
   }
 };

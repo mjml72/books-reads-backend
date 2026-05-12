@@ -17,44 +17,47 @@ export const BooksController = {
       const { id } = req.params;
       const response = await BooksModel.findById(id);
 
-      if (!response) return res.status(404).json({ error: 'Book not found' });
+      if (!response) {
+        return res.status(404).json({ error: 'Book not found' });
+      }
       res.json(response);
 
     } catch (error) {
-      res.status(404).send(error.message);
+      res.status(500).send(error.message);
     }
   },
 
   findByTitle: async (req, res) => {
     try {
-      const { title } = req.body
-      const response = await BooksModel.findById(title);
+      const { title } = req.query;
+      const response = await BooksModel.findByTitle(title);
 
-      if (!response) return res.status(404).json({ error: 'Book not found' });
+      if (!response) {
+        return res.status(404).json({ error: 'Book not found' });
+      }
+
       res.json(response);
 
     } catch (error) {
-      res.status(404).send(error.message);
+      res.status(500).send(error.message);
     }
   },
 
 
   create: async (req, res) => {
     try {
-      const data = req.body;
-      const created = await BooksModel.create(data);
-      res.status(201).json(newBook);
+      const response = await BooksModel.create(req.body);
+      res.status(201).json(response);
     } catch (err) {
-      res.status(400).json({ error: err.message });
+      res.status(500).json({ error: err.message });
     }
   },
 
   update: async (req, res) => {
     try {
       const { id } = req.params;
-      const data = req.body;
-      const updated = await BooksModel.update(id, data);
-      res.status(200).json(updated);
+      const response = await BooksModel.update(id, req.body);
+      res.status(200).json(response);
 
     } catch (error) {
       res.status(500).send(error.message);
@@ -65,7 +68,7 @@ export const BooksController = {
     try {
       const { id } = req.params;
       await BooksModel.delete(id);
-      res.json({ message: 'Usuario eliminado' });
+      res.json({ message: 'Book eliminado' });
 
     } catch (error) {
       res.status(500).send(error.message);

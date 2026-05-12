@@ -1,4 +1,4 @@
-import { dbConfiguration } from './src/config/db.js';
+import { dbConfiguration } from '../config/db.js';
 
 const db = await dbConfiguration();
 
@@ -13,21 +13,19 @@ export const ShelvesModel = {
   },
 
   findByName: async (name) => {
-    let search = `%${name}%`;
-    return await db.get('SELECT * FROM Shelves WHERE name = ? OR name LIKE ?', [name, search]);
+    return await db.all('SELECT * FROM Shelves WHERE name LIKE ?', [`%${name}%`]);
   },
 
   create: async (name) => {
     return await db.run(
-      `INSERT INTO Shelves (name)
-       VALUES (?)`
+      'INSERT INTO Shelves (name) VALUES (?)',
       [name]
     );
   },
 
   update: async (id, name) => {
     return await db.run(
-      `UPDATE Shelves SET name = ? WHERE shelvesID = ?`,
+      'UPDATE Shelves SET name = ? WHERE shelvesID = ?',
       [name, id]
     );
   },

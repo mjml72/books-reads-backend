@@ -12,62 +12,73 @@ export const BooksWritersController = {
     }
   },
 
+
   findByBookId: async (req, res) => {
     try {
       const { bookId } = req.params;
-      const response = await BooksWritersModel.findByBookId(id);
+      const response = await BooksWritersModel.findByBookId(bookId);
 
-      if (!response) return res.status(404).json({ error: 'Book not found' });
+      if (!response) {
+        return res.status(404).json({ error: 'Book not found' });
+      }
       res.json(response);
 
-    } catch (error) {
-      res.status(404).send(error.message);
-    }
-  },
-
-  findByWriterId: async (req, res) => {
-    try {
-      const { id } = req.params;
-      const response = await BooksWritersModel.findByWriterId(id);
-
-      if (!response) return res.status(404).json({ error: 'Book not found' });
-      res.json(response);
-
-    } catch (error) {
-      res.status(404).send(error.message);
-    }
-  },
-
-  create: async (req, res) => {
-    try {
-      const {bookID, writerID} = req.body;
-      const created = await BooksWritersModel.create(bookID, writerID);
-      res.status(201).json(created);
-    } catch (error) {
-      res.status(400).json({ error: err.message });
-    }
-  },
-
-  update: async (req, res) => {
-    try {
-      
-      const {bookID, writerID} = req.body; 
-      const updated = await BooksWritersModel.update(bookID, writerID);
-      res.status(200).json(updated);
-      
     } catch (error) {
       res.status(500).send(error.message);
     }
   },
 
+  findByWriterId: async (req, res) => {
+    try {
+      const { writerId } = req.params;
+      const response = await BooksWritersModel.findByWriterId(writerId);
+
+      if (!response) {
+        return res.status(404).json({ error: 'Book not found' });
+      }
+      res.json(response);
+
+    } catch (error) {
+      res.status(500).send(error.message);
+    }
+  },
+
+
+  findByIds: async (req, res) => {
+    try {
+      const { bookId, writerId } = req.params;
+      const response = await BooksWritersModel.findByIds(bookId, writerId);
+      if (!response){
+        return res.status(404).json({ error: 'Book not found' });
+      } 
+      res.json(response);
+
+
+    } catch (error) {
+      res.status(500).send(error.message);
+    }
+  },
+
+
+  create: async (req, res) => {
+    try {
+      const { bookID, writerID } = req.body;
+      const response = await BooksWritersModel.create(bookID, writerID);
+      res.status(201).json(response);
+    } catch (error) {
+      res.status(500).json({ error: err.message });
+    }
+  },
+
+
   delete: async (req, res) => {
     try {
-      const {bookId, writerId} = req.params;
-      await BooksWritersModel.delete(bookID, writerID);
+      const { bookId, writerId } = req.params;
+      await BooksWritersModel.delete(bookId, writerId);
       res.json({ message: 'Relacion eliminado' });
-      
+
     } catch (error) {
-      res.status(500).send(error.message);      
+      res.status(500).send(error.message);
     }
   }
 };

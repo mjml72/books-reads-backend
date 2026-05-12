@@ -1,4 +1,4 @@
-import { dbConfiguration } from './config/db.js';
+import { dbConfiguration } from '../config/db.js';
 
 const db = await dbConfiguration();
 
@@ -13,24 +13,23 @@ export const BooksModel = {
   },
 
   findByTitle: async (title) => {
-    let search = `%${title}%`
-    return await db.get('SELECT * FROM Books WHERE title = ? OR title LIKE ?', [title, search]);
+    return await db.all('SELECT * FROM Books WHERE title LIKE ?', [`%${title}%`]);
   },
 
+  
   create: async (data) => {
-    const {title, description, published, categories, cover, pages, isbn} = data;
+    const { title, description, published, categories, cover, pages, isbn } = data;
+
     return await db.run(
-      `INSERT INTO Books (title, description, published, categories, cover, pages, isbn)
-       VALUES (?, ?, ?, ?, ?, ?, ?)`
+      'INSERT INTO Books (title, description, published, categories, cover, pages, isbn) VALUES (?, ?, ?, ?, ?, ?, ?)',
       [title, description, published, categories, cover, pages, isbn]
     );
   },
 
   update: async (id, data) => {
-    const {title, description, published, categories, cover, pages, isbn} = data;
+    const { title, description, published, categories, cover, pages, isbn } = data;
     return await db.run(
-      `UPDATE Books SET title = ?, description = ?, published = ?, categories = ?, cover = ?,
-       pages = ?, isbn = ? WHERE bookID = ?`,
+      'UPDATE Books SET title = ?, description = ?, published = ?, categories = ?, cover = ?,pages = ?, isbn = ? WHERE bookID = ?',
       [title, description, published, categories, cover, pages, isbn, id]
     );
   },
