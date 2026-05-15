@@ -1,18 +1,24 @@
+
+
+
 UNIVERSO DEL DISCURSO
+
+
 
 Crear BD aplicación organizador de lectura tipo goodreads sin red social.
 
-Libro, debemos registrar titulo, escritor, descripción, fecha de publicación, publicador, cover, isbn, páginas.
-Debemos poner el status del libro, quiero leer, leyendo, leído. Si es favorito. Rating. Género.
-Organizar la lectura, fecha de inicio, fin, progreso de páginas.(opcional).
+Libro, debemos registrar titulo, escritor, descripción, fecha de publicación, cover, isbn, páginas.
 
-Género, debemos registrar varios géneros, esperando a ver la lista de géneros.
+Debemos poner el status del libro, quiero leer, leyendo, leído. Rating. Género.
+
+Organizar la lectura, fecha de inicio, fin, progreso de páginas.
+
+Escritor, debemos registrar nombre.
+
+Shelves, que se puedan crear estanterías.
 
 Notas, que se pueda escribir notas de los libros.
 
-Autor, debemos registrar nombre.
-
-Tags, que se puedan crear etiquetas.
 
 
 

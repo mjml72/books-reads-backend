@@ -1,4 +1,7 @@
+
+
 MODELO RELACIONAL
+
 
 Reglas de normalización aplicadas, cumple con 3FN.
 
