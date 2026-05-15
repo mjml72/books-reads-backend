@@ -1,6 +1,6 @@
-<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.3.0 Chrome/140.0.7339.249 Electron/38.7.2 Safari/537.36" version="29.3.0">
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.3.0 Chrome/140.0.7339.249 Electron/38.7.2 Safari/537.36">
   <diagram name="Página-1" id="IEHu1L49vt7M08501hbA">
-    <mxGraphModel dx="780" dy="625" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="583" pageHeight="827" math="0" shadow="0">
+    <mxGraphModel dx="553" dy="383" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="583" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -160,7 +160,7 @@
             <mxPoint x="330" y="650" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="CzYtbm6BVvKGrf0lh7vI-9" parent="1" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;" value="organiza" vertex="1">
+        <mxCell id="CzYtbm6BVvKGrf0lh7vI-9" parent="1" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;" value="Organiza" vertex="1">
           <mxGeometry height="60" width="120" x="640" y="425" as="geometry" />
         </mxCell>
         <mxCell id="CzYtbm6BVvKGrf0lh7vI-10" edge="1" parent="1" source="iiRl8w4fCP4vkBYx9b8L-3" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="CzYtbm6BVvKGrf0lh7vI-9" value="">
@@ -175,7 +175,7 @@
             <mxPoint x="800" y="630" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="CzYtbm6BVvKGrf0lh7vI-12" parent="1" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;" value="clasifica" vertex="1">
+        <mxCell id="CzYtbm6BVvKGrf0lh7vI-12" parent="1" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;" value="Clasifica" vertex="1">
           <mxGeometry height="60" width="120" x="600" y="515" as="geometry" />
         </mxCell>
         <mxCell id="CzYtbm6BVvKGrf0lh7vI-13" edge="1" parent="1" source="iiRl8w4fCP4vkBYx9b8L-3" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="CzYtbm6BVvKGrf0lh7vI-12" value="">
@@ -190,7 +190,7 @@
             <mxPoint x="800" y="630" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="CzYtbm6BVvKGrf0lh7vI-15" parent="1" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;" value="recibe" vertex="1">
+        <mxCell id="CzYtbm6BVvKGrf0lh7vI-15" parent="1" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;" value="&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Tiene&lt;/span&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry height="60" width="120" x="600" y="650" as="geometry" />
         </mxCell>
         <mxCell id="CzYtbm6BVvKGrf0lh7vI-16" edge="1" parent="1" source="iiRl8w4fCP4vkBYx9b8L-3" style="endArrow=none;html=1;rounded=0;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="CzYtbm6BVvKGrf0lh7vI-15" value="">

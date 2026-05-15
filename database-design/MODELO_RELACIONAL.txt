@@ -1,16 +1,18 @@
 MODELO RELACIONAL
 
-LIBRO (LibroID(PK), Titulo NOT NULL, description, cover, pageCount, ISBN(Unique))
+Reglas de normalización aplicadas, cumple con 3FN.
 
-ESCRITOR (EscritorID(PK), Nombre)
+Books (bookID(PK), title NOT NULL, description, published, categories, cover, pages, isbn(Unique))
 
-Libro_Escritor ((LibroID(FK) NOT NULL, EscritorID(FK) NOT NULL)(PK))
+Writers (writerID(PK), name)
 
-SHELVES (ShelvesID(PK), Nombre(UNIQUE))
+Books_Writers ((bookID(FK) NOT NULL, writerID(FK) NOT NULL)(PK))
 
-Libro_Shelves ((LibroID(FK) NOT NULL, ShelvesID(FK) NOT NULL)(PK))
+Shelves (shelvesID(PK), name)
 
-BookStatus (LibroID(PK)(FK), progress, status, rating, start, end)
+Books_Shelves ((bookID(FK) NOT NULL, shelvesID(FK) NOT NULL)(PK))
 
-Notas (NotasID(PK), texto, LibroID(FK) NOT NULL, createdAt)
+BookStatus (bookID(PK)(FK), progress, status, rating, startReading, endReading)
+
+Notes (notesID(PK), text, created, LibroID(FK) NOT NULL)
 
