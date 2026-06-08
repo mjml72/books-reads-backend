@@ -1,5 +1,5 @@
 
-API REST con Node.js, Express, SQLite
+
 API RESTful construida con Node.js Express. Utiliza SQLite como motor de base de datos mediante consultas SQL puras, implementando prácticas de seguridad contra inyecciones SQL.
 
 Tecnologías Utilizadas
