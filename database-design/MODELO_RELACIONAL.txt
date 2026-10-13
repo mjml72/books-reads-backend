@@ -5,17 +5,21 @@ MODELO RELACIONAL
 
 Reglas de normalización aplicadas, cumple con 3FN.
 
-Books (bookID(PK), title NOT NULL, description, published, categories, cover, pages, isbn(Unique))
+Users (userID(PK), name NOT NULL UNIQUE, email NOT NULL UNIQUE, password NOT NULL)
 
-Writers (writerID(PK), name)
+Books (bookID(PK), title NOT NULL, description, published, categories, cover, pages, isbn UNIQUE)
+
+Shelves (shelvesID(PK), name NOT NULL, userID(FK) NOT NULL)
+
+BookStatus ((userID(FK),bookID(FK))(PK), progress, status, rating, startReading, endReading)
+
+Writers (writerID(PK), name NOT NULL)
+
+Users_Books ((userID(FK) NOT NULL, bookID(FK) NOT NULL)(PK))
 
 Books_Writers ((bookID(FK) NOT NULL, writerID(FK) NOT NULL)(PK))
 
-Shelves (shelvesID(PK), name)
-
 Books_Shelves ((bookID(FK) NOT NULL, shelvesID(FK) NOT NULL)(PK))
 
-BookStatus (bookID(PK)(FK), progress, status, rating, startReading, endReading)
-
-Notes (notesID(PK), text, created, LibroID(FK) NOT NULL)
+Notes (notesID(PK), text, created, bookID(FK) NOT NULL, userID(FK) NOT NULL)
 

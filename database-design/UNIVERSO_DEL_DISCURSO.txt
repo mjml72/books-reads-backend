@@ -5,7 +5,9 @@ UNIVERSO DEL DISCURSO
 
 
 
-Crear BD aplicación organizador de lectura tipo goodreads sin red social.
+Crear BD aplicación organizador de lectura tipo goodreads sin red social en la nube.
+
+Debemos guardar los datos del usuario, nombre de usuario, email, contraseña.
 
 Libro, debemos registrar titulo, escritor, descripción, fecha de publicación, cover, isbn, páginas.
 

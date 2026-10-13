@@ -1,0 +1,19 @@
+MODELO ENTIDAD RELACION
+
+Users (ID(PK), name UNIQUE NOT NULL, email UNIQUE NOT NULL, password NOT NULL)
+
+Books (ID(PK), titulo NOT NULL, descripcion, coverURL, pages, ISBN UNIQUE)
+
+Shelves (ID(PK), name NOT NULL, userID(FK))
+
+BooksStatus ((userID(FK), bookID(FK))(PK), status NOT NULL, progress, rating, start, end)
+
+Writers (ID(PK), name NOT NULL)
+
+Users_Books ((userID(FK), bookID(FK))(PK))
+
+Books_Writers ((bookID(FK), writerID(FK))(PK))
+
+Books_Shelves ((bookID(FK), shelveID(FK))(PK))
+
+Notas (ID(PK), texto, userID(FK) NOT NULL, bookID(FK) NOT NULL, created)
