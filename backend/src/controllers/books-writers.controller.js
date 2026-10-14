@@ -62,8 +62,8 @@ export const BooksWritersController = {
 
   create: async (req, res) => {
     try {
-      const { bookID, writerID } = req.body;
-      const response = await BooksWritersModel.create(bookID, writerID);
+      const { bookId, writerId } = req.body;
+      const response = await BooksWritersModel.create(bookId, writerId);
       res.status(201).json(response);
     } catch (error) {
       res.status(500).json({ error: err.message });
