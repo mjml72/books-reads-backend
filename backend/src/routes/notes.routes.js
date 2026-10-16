@@ -3,9 +3,8 @@ import {NotesController} from '../controllers/notes.controller.js';
 
 export const routerNotes = Router();
 
-routerNotes.get('/notes',NotesController.findAll);
-routerNotes.get('/notes/:id', NotesController.findById);
-routerNotes.get('/notes/book/:bookId', NotesController.findByBookId);
+routerNotes.get('/notes/:bookId/:userId', NotesController.findByBookId);
+routerNotes.get('/notes/:noteId', NotesController.findById);
 routerNotes.post('/notes', NotesController.create);
-routerNotes.put('/notes/:id', NotesController.update);
-routerNotes.delete('/notes/:id', NotesController.delete);
+routerNotes.put('/notes/:noteId', NotesController.update);
+routerNotes.delete('/notes/:noteId', NotesController.delete);

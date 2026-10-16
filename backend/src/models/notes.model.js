@@ -3,33 +3,33 @@ import { dbConfiguration } from '../config/db.js';
 const db = await dbConfiguration();
 
 export const NotesModel = {
-  findAll: async () => {
-    return await db.all('SELECT * FROM Notes');
-  },
 
+  
+  findByBookId: async (book_id, user_id) => {
+    return await db.all('SELECT * FROM Notes WHERE book_id = ? AND user_id = ?', 
+      [book_id, user_id]);
+  },
+  
   findById: async (id) => {
-    return await db.get('SELECT * FROM Notes WHERE notesID = ?', [id]);
+    return await db.get('SELECT * FROM Notes WHERE note_id = ?', [id]);
   },
 
-  findByBookId: async (id) => {
-    return await db.all('SELECT * FROM Notes WHERE bookID = ?', [id]);
-  },
 
-  create: async (text, created, bookID) => {
+  create: async (text, created, book_id, user_id) => {
     return await db.run(
-      'INSERT INTO Notes (text, created, bookID) VALUES (?, ?, ?)',
-      [text, created, bookID]
+      'INSERT INTO Notes (text, created, book_id, user_id) VALUES (?, ?, ?, ?)',
+      [text, created, book_id, user_id]
     );
   },
 
-  update: async (notesID, text, created, bookID) => {
+  update: async (note_id, text, created, book_id, user_id) => {
     return await db.run(
-      'UPDATE Notes SET text = ?, created = ? WHERE notesID = ? AND bookID = ?',
-      [text, created, notesID, bookID]
+      'UPDATE Notes SET text = ?, created = ? WHERE note_id = ? AND book_id = ? AND user_id = ?',
+      [text, created, note_id, book_id, user_id]
     );
   },
 
   delete: async (id) => {
-    return await db.run('DELETE FROM Notes WHERE notesID = ?', [id]);
+    return await db.run('DELETE FROM Notes WHERE note_id = ?', [id]);
   }
 };

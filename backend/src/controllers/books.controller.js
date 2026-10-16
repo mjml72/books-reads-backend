@@ -14,8 +14,8 @@ export const BooksController = {
 
   findById: async (req, res) => {
     try {
-      const { id } = req.params;
-      const response = await BooksModel.findById(id);
+      const { bookId } = req.params;
+      const response = await BooksModel.findById(bookId);
 
       if (!response) {
         return res.status(404).json({ error: 'Book not found' });
@@ -46,7 +46,8 @@ export const BooksController = {
 
   create: async (req, res) => {
     try {
-      const response = await BooksModel.create(req.body);
+      const { title, description, published, cover, pages, isbn } = req.body;
+      const response = await BooksModel.create(title, description, published, cover, pages, isbn);
       res.status(201).json(response);
     } catch (err) {
       res.status(500).json({ error: err.message });
@@ -55,8 +56,9 @@ export const BooksController = {
 
   update: async (req, res) => {
     try {
-      const { id } = req.params;
-      const response = await BooksModel.update(id, req.body);
+      const { bookId } = req.params
+      const { title, description, published, cover, pages, isbn } = req.body;
+      const response = await BooksModel.update(bookId, title, description, published, cover, pages, isbn);
       res.status(200).json(response);
 
     } catch (error) {
@@ -66,8 +68,8 @@ export const BooksController = {
 
   delete: async (req, res) => {
     try {
-      const { id } = req.params;
-      await BooksModel.delete(id);
+      const { bookId } = req.params;
+      await BooksModel.delete(bookId);
       res.json({ message: 'Book eliminado' });
 
     } catch (error) {

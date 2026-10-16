@@ -3,32 +3,29 @@ import { dbConfiguration } from '../config/db.js';
 const db = await dbConfiguration();
 
 export const BookStatusModel = {
-  findAll: async () => {
-    return await db.all('SELECT * FROM BookStatus');
+
+  findById: async (user_id, book_id) => {
+    return await db.get('SELECT * FROM BookStatus WHERE book_id = ? AND user_id = ?', 
+      [book_id, user_id]);
   },
 
-  findById: async (id) => {
-    return await db.get('SELECT * FROM BookStatus WHERE bookID = ?', [id]);
-  },
-
-  create: async (data) => {
-    const {bookID, progress, status, rating, startReading, endReading}=data;
+  create: async (user_id, book_id, progress, status, rating, startReading, endReading) => {
     return await db.run(
-      'INSERT INTO BookStatus (bookID, progress, status, rating, startReading, endReading) VALUES (?, ?, ?, ?, ?, ?)',
-      [bookID, progress, status, rating, startReading, endReading]
+      'INSERT INTO BookStatus (user_id, book_id, progress, status, rating, startReading, endReading) VALUES (?, ?, ?, ?, ?, ?, ?)',
+      [user_id, book_id, progress, status, rating, startReading, endReading]
     );
   },
 
-  
-  update: async (id, data) => {
-    const {bookID, progress, status, rating, startReading, endReading}=data;
+
+  update: async (user_id, book_id, progress, status, rating, startReading, endReading) => {
     return await db.run(
-      'UPDATE BookStatus SET progress = ?, status = ?, rating = ?, startReading = ?, endReading = ? WHERE bookID = ?',
-      [progress, status, rating, startReading, endReading, bookID]
+      'UPDATE BookStatus SET progress = ?, status = ?, rating = ?, startReading = ?, endReading = ? WHERE book_id = ? AND user_id = ?',
+      [progress, status, rating, startReading, endReading, book_id, user_id]
     );
   },
 
-  delete: async (id) => {
-    return await db.run('DELETE FROM BookStatus WHERE bookID = ?', [id]);
+  delete: async (user_id, book_id) => {
+    return await db.run('DELETE FROM BookStatus WHERE book_id = ? AND user_id',
+      [book_id, user_id]);
   }
 };

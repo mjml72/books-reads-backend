@@ -4,8 +4,8 @@ import {BookStatusController} from '../controllers/bookstatus.controller.js';
 
 export const routerBookStatus = Router();
 
-routerBookStatus.get('/bookstatus',BookStatusController.findAll);
-routerBookStatus.get('/bookstatus/:id', BookStatusController.findById);
+
+routerBookStatus.get('/bookstatus/:userId/:bookId', BookStatusController.findById);
 routerBookStatus.post('/bookstatus', Status, BookStatusController.create);
-routerBookStatus.put('/bookstatus/:id', Status, BookStatusController.update);
-routerBookStatus.delete('/bookstatus/:id', BookStatusController.delete);
+routerBookStatus.put('/bookstatus/:userId/:bookId', Status, BookStatusController.update);
+routerBookStatus.delete('/bookstatus/:userId/:bookId', BookStatusController.delete);
