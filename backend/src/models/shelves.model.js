@@ -6,7 +6,7 @@ const db = await dbConfiguration();
 export const ShelvesModel = {
 
   findAll: async (user_id) => {
-    return await db.all('SELECT * FROM Shelves WEHERE user_id = ?', [user_id]);
+    return await db.all('SELECT * FROM Shelves WHERE user_id = ?', [user_id]);
   },
 
   findById: async (user_id, shelf_id) => {
@@ -29,7 +29,7 @@ export const ShelvesModel = {
   getAllBooksFromShelf: async(shelf_id) => {
     return await db.all(`
       SELECT * FROM Books b
-      INNER JOIN Books_Shelves bs ON b.book_id = bs.book_id
+      INNER JOIN Books_Shelves bs ON bs.book_id = b.book_id
       WHERE bs.shelf_id = ?`, [shelf_id]);
   },
 
@@ -37,7 +37,7 @@ export const ShelvesModel = {
   getAllShelvesFromBook: async(book_id, user_id)=>{
     return await db.all(`
       SELECT * FROM Shelves s
-      INNER JOIN Books_Shelves bs ON s.shelf_id = bs.shelf_id
+      INNER JOIN Books_Shelves bs ON bs.shelf_id = s.shelf_id
       WHERE bs.book_id = ? AND s.user_id = ?
       `, [book_id, user_id]);
   },

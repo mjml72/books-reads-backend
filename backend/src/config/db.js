@@ -17,6 +17,7 @@ export async function dbConfiguration() {
     });
 
 
+    await db.run('PRAGMA foreign_keys = ON;');
     return db;
 
   } catch (error) {

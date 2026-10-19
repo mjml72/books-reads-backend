@@ -13,12 +13,12 @@ app.use(cors());
 app.use(express.json());
 process.loadEnvFile('./.env');
 const PORT = process.env.PORT || 3000;
-app.use('/booksreads/api/', routerBooks);
-app.use('/booksreads/api/', routerBookStatus);
-app.use('/booksreads/api/', routerShelves);
-app.use('/booksreads/api/', routerNotes);
-app.use('/booksreads/api/', routerUsers)
-app.use('/booksreads/api/', routerWriters);
+app.use('/booksreads', routerBooks);
+app.use('/booksreads', routerBookStatus);
+app.use('/booksreads', routerShelves);
+app.use('/booksreads', routerNotes);
+app.use('/booksreads', routerUsers)
+app.use('/booksreads', routerWriters);
 
 
 app.listen(PORT, () => {

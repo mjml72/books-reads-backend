@@ -11,10 +11,10 @@ export const NotesController = {
       if (!response) {
         return res.status(404).json({ error: 'Note not found' });
       }
-      res.json(response);
+      return res.status(200).json(response);
 
     } catch (error) {
-      res.status(500).send(error.message);
+      return res.status(500).send(error.message);
     }
   },
   findById: async (req, res) => {
@@ -25,10 +25,10 @@ export const NotesController = {
       if (!response) {
         return res.status(404).json({ error: 'Note not found' });
       }
-      res.json(response);
+      return res.status(200).json(response);
 
     } catch (error) {
-      res.status(500).send(error.message);
+      return res.status(500).send(error.message);
     }
   },
 
@@ -37,9 +37,9 @@ export const NotesController = {
     try {
       const { text, created, book_id, user_id } = req.body;
       const response = await NotesModel.create(text, created, book_id, user_id);
-      res.status(201).json(response);
+      return res.status(201).json(response);
     } catch (error) {
-      res.status(500).send(error.message);
+      return res.status(500).send(error.message);
     }
   },
 
@@ -48,10 +48,10 @@ export const NotesController = {
       const { noteId } = req.params;
       const { text, created, book_id, user_id } = req.body;
       const response = await NotesModel.update(noteId, text, created, book_id, user_id);
-      res.status(200).json(response);
+      return res.status(200).json(response);
 
     } catch (error) {
-      res.status(500).send(error.message);
+      return res.status(500).send(error.message);
     }
   },
 
@@ -59,10 +59,10 @@ export const NotesController = {
     try {
       const { noteId } = req.params;
       await NotesModel.delete(noteId);
-      res.json({ message: 'Note eliminado' });
+      return res.status(200).json({ message: 'Note eliminado' });
 
     } catch (error) {
-      res.status(500).send(error.message);
+      return res.status(500).send(error.message);
     }
   }
 };

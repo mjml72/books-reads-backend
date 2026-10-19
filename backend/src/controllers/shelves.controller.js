@@ -5,11 +5,27 @@ export const ShelvesController = {
   findAll: async (req, res) => {
     try {
       const { userId } = req.params;
-      const response = await ShelvesModel.findAll(userId);
-      res.status(200).json(response);
+      const { name } = req.query;
+
+      let response;
+
+      if (name) {
+        response = await ShelvesModel.findByName(userId, name);
+
+      } else {
+        response = await ShelvesModel.findAll(userId);
+
+      }
+
+      if (!response) {
+        return res.status(404).json({ error: 'Shelf not found' });
+      }
+
+
+      return res.status(200).json(response);
 
     } catch (error) {
-      res.status(500).send(error.message);
+      return res.status(500).send(error.message);
     }
   },
 
@@ -22,30 +38,12 @@ export const ShelvesController = {
       if (!response) {
         return res.status(404).json({ error: 'Shelf not found' });
       }
-      res.json(response);
+      return res.status(200).json(response);
 
     } catch (error) {
-      res.status(500).send(error.message);
+      return res.status(500).send(error.message);
     }
   },
-
-  findByName: async (req, res) => {
-    try {
-      const { userId } = req.params;
-      const { name } = req.query;
-      const response = await ShelvesModel.findByName(userId, name);
-
-      if (!response) {
-        return res.status(404).json({ error: 'Shelf not found' });
-      }
-
-      res.json(response);
-
-    } catch (error) {
-      res.status(500).send(error.message);
-    }
-  },
-
 
   create: async (req, res) => {
     try {
@@ -93,11 +91,11 @@ export const ShelvesController = {
   },
 
   // borrar libro a la lista de libros del ususario
-  deleteBookFromShelf: async () => {
+  deleteBookFromShelf: async (req, res) => {
     try {
       const { bookId, shelfId } = req.params;
       await ShelvesModel.deleteBookFromShelf(bookId, shelfId);
-      res.json({ message: 'Libro eliminado' });
+      res.status(200).json({ message: 'Libro eliminado' });
 
     } catch (error) {
       res.status(500).send(error.message);
@@ -121,7 +119,7 @@ export const ShelvesController = {
     try {
       const { shelfId, userId } = req.params;
       await ShelvesModel.delete(shelfId, userId);
-      res.json({ message: 'Shelve eliminado' });
+      res.status(200).json({ message: 'Shelf eliminado' });
 
     } catch (error) {
       res.status(500).send(error.message);

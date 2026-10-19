@@ -13,7 +13,6 @@ CREATE TABLE IF NOT EXISTS Books (
 	title TEXT NOT NULL,
 	description TEXT,
 	published TEXT,
-	categories TEXT,
 	cover TEXT,
 	pages INTEGER,
 	isbn TEXT UNIQUE
@@ -39,7 +38,7 @@ CREATE TABLE IF NOT EXISTS Users_Books(
 	FOREIGN KEY (book_id) REFERENCES Books(book_id) ON DELETE CASCADE
 );
 
-CREATE TABLE  IF NOT EXISTS Books_Writers (
+CREATE TABLE IF NOT EXISTS Books_Writers (
 	book_id INTEGER NOT NULL,
 	writer_id INTEGER NOT NULL,
 	PRIMARY KEY (book_id, writer_id),

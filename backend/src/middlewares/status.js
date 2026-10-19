@@ -1,4 +1,4 @@
-export function  Status(req, res, next) {
+export function  status(req, res, next) {
   const { status } = req.body;
 
   if (!status || status.trim() === "") {

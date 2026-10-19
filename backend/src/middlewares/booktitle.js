@@ -1,5 +1,5 @@
 
-export function Title(req, res, next) {
+export function title(req, res, next) {
   const { title } = req.body;
 
   if (!title || title.trim() === "") {

@@ -36,7 +36,7 @@ export const WritersModel = {
   getWriterBook: async (book_id) => {
     return await db.all(`
       SELECT * FROM Writers w
-      INNER JOIN Books_Writers bw ON w.writer_id = bw.writer_id
+      INNER JOIN Books_Writers bw ON bw.writer_id = w.writer_id
       WHERE bw.book_id = ?`, [book_id]);
   },
 
