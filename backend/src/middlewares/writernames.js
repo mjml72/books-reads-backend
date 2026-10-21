@@ -1,3 +1,4 @@
+
 export function  writerName(req, res, next) {
   const { name } = req.body;
 

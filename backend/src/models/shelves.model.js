@@ -25,16 +25,18 @@ export const ShelvesModel = {
     );
   },
 
-    // listar todos los libros de una estantería del usuario
-  getAllBooksFromShelf: async(shelf_id) => {
+  // listar todos los libros de una estantería del usuario
+  getAllBooksFromShelf: async (user_id, shelf_id) => {
     return await db.all(`
-      SELECT * FROM Books b
+      SELECT *
+      FROM Books b
       INNER JOIN Books_Shelves bs ON bs.book_id = b.book_id
-      WHERE bs.shelf_id = ?`, [shelf_id]);
+      INNER JOIN Shelves s ON s.shelf_id = bs.shelf_id
+      WHERE bs.shelf_id = ? AND s.user_id = ?`, [shelf_id, user_id]);
   },
 
   // listar todas las estanterias de un libro del usuario
-  getAllShelvesFromBook: async(book_id, user_id)=>{
+  getAllShelvesFromBook: async (book_id, user_id) => {
     return await db.all(`
       SELECT * FROM Shelves s
       INNER JOIN Books_Shelves bs ON bs.shelf_id = s.shelf_id
@@ -51,8 +53,8 @@ export const ShelvesModel = {
   },
 
   // borrar libro a la lista de libros del ususario
-  deleteBookFromShelf: async (book_id, shelf_id) => {
-    return await db.run('DELETE FROM Books_Shelves WHERE book_id = ? AND shelf_id = ?', 
+  deleteBookFromShelf: async (shelf_id, book_id) => {
+    return await db.run('DELETE FROM Books_Shelves WHERE book_id = ? AND shelf_id = ?',
       [book_id, shelf_id]);
   },
 

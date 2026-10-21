@@ -2,6 +2,7 @@ import { WritersModel } from '../models/writers.model.js';
 
 
 export const WritersController = {
+  // busqueda de escritor por nombre o lista de todos los escritores
   findAll: async (req, res) => {
     try {
       const { name } = req.query;
@@ -26,16 +27,16 @@ export const WritersController = {
     }
   },
 
-
+  // busqueda de escritor por id
   findById: async (req, res) => {
     try {
       const { writerId } = req.params;
-      const response = await WritersModel.findById(writerId);
+      const writer = await WritersModel.findById(writerId);
 
-      if (!response) {
+      if (!writer) {
         return res.status(404).json({ error: 'Writer not found' });
       }
-      return res.status(200).json(response);
+      return res.status(200).json(writer);
 
     } catch (error) {
       return res.status(500).send(error.message);
@@ -43,6 +44,7 @@ export const WritersController = {
   },
 
 
+  // crea nuevo escritor
   create: async (req, res) => {
     try {
       const { name } = req.body;
@@ -100,7 +102,7 @@ export const WritersController = {
   },
 
 
-
+  // actualiza datos de escritor
   update: async (req, res) => {
     try {
       const { writerId } = req.params;
@@ -113,6 +115,7 @@ export const WritersController = {
     }
   },
 
+  // borra datos del escritor de la base de datos
   delete: async (req, res) => {
     try {
       const { writerId } = req.params;

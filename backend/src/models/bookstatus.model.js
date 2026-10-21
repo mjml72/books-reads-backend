@@ -5,8 +5,8 @@ const db = await dbConfiguration();
 export const BookStatusModel = {
 
   findById: async (user_id, book_id) => {
-    return await db.get('SELECT * FROM BookStatus WHERE book_id = ? AND user_id = ?', 
-      [book_id, user_id]);
+    return await db.get('SELECT * FROM BookStatus WHERE user_id = ? AND book_id  = ?', 
+      [user_id, book_id]);
   },
 
   create: async (user_id, book_id, progress, status, rating, start_reading, end_reading) => {

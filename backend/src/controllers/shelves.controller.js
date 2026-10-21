@@ -1,7 +1,9 @@
 import { ShelvesModel } from '../models/shelves.model.js';
+import { UsersBooks } from '../services/UsersBooks.js';
 
 
 export const ShelvesController = {
+  // busqueda de estanteria por nombre o lista de todos las estanterias del ususario
   findAll: async (req, res) => {
     try {
       const { userId } = req.params;
@@ -30,6 +32,7 @@ export const ShelvesController = {
   },
 
 
+  // busqueda de estanteria por id de usuario
   findById: async (req, res) => {
     try {
       const { userId, shelfId } = req.params;
@@ -45,6 +48,7 @@ export const ShelvesController = {
     }
   },
 
+  // crea nueva estanteria
   create: async (req, res) => {
     try {
       const { name, user_id } = req.body;
@@ -58,8 +62,8 @@ export const ShelvesController = {
   // listar todos los libros de una estantería del usuario
   getAllBooksFromShelf: async (req, res) => {
     try {
-      const { shelfId } = req.params;
-      const response = await ShelvesModel.getAllBooksFromShelf(shelfId);
+      const { userId, shelfId } = req.params;
+      const response = await ShelvesModel.getAllBooksFromShelf(userId, shelfId);
       res.status(200).json(response);
 
     } catch (error) {
@@ -82,7 +86,16 @@ export const ShelvesController = {
   // añadir libro a la estanteria del ususario
   addBookToShelf: async (req, res) => {
     try {
+      const { userId } = req.params;
       const { shelf_id, book_id } = req.body;
+
+      // comprueba que el libro esta en la biblioteca del ususario
+      const libroEnBiblioteca = await UsersBooks(userId, book_id);
+
+      if (!libroEnBiblioteca) {
+        return res.status(403).json({ error: "Este libro no está en la biblioteca del usuario." });
+      }
+
       const response = await ShelvesModel.addBookToShelf(shelf_id, book_id);
       res.status(201).json(response);
     } catch (error) {
@@ -93,8 +106,8 @@ export const ShelvesController = {
   // borrar libro a la lista de libros del ususario
   deleteBookFromShelf: async (req, res) => {
     try {
-      const { bookId, shelfId } = req.params;
-      await ShelvesModel.deleteBookFromShelf(bookId, shelfId);
+      const { shelfId, bookId } = req.params;
+      await ShelvesModel.deleteBookFromShelf(shelfId, bookId);
       res.status(200).json({ message: 'Libro eliminado' });
 
     } catch (error) {
@@ -102,7 +115,7 @@ export const ShelvesController = {
     }
   },
 
-
+  // actualiza datos de estanteria
   update: async (req, res) => {
     try {
       const { shelfId } = req.params;
@@ -115,6 +128,7 @@ export const ShelvesController = {
     }
   },
 
+  // borra la estanteria de la base de datos
   delete: async (req, res) => {
     try {
       const { shelfId, userId } = req.params;

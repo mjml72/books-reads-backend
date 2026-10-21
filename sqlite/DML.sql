@@ -1,5 +1,5 @@
 
-/* simular datos para tests*/
+/* DML simular datos para tests*/
 INSERT INTO Books (title, description,  published, cover, pages, isbn)
 VALUES ('libro1', 'descricion del libro',  '2023', 'cover url', 100, '01234567891');
 INSERT INTO Books (title, description,  published, cover, pages, isbn)

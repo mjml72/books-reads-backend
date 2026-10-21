@@ -2,6 +2,7 @@ import { BooksModel } from '../models/books.model.js';
 
 
 export const BooksController = {
+  // busqueda de libro por titulo o lista de todos los libros
   findAll: async (req, res) => {
     try {
       const { title } = req.query;
@@ -26,15 +27,16 @@ export const BooksController = {
     }
   },
 
+  // busqueda de libro por id
   findById: async (req, res) => {
     try {
       const { bookId } = req.params;
-      const response = await BooksModel.findById(bookId);
+      const book = await BooksModel.findById(bookId);
 
-      if (!response) {
+      if (!book) {
         return res.status(404).json({ error: 'Book not found' });
       }
-      return res.status(200).json(response);
+      return res.status(200).json(book);
 
     } catch (error) {
       return res.status(500).send(error.message);
@@ -42,7 +44,7 @@ export const BooksController = {
   },
 
 
-
+  // crea nuevo libro
   create: async (req, res) => {
     try {
       const { title, description, published, cover, pages, isbn } = req.body;
@@ -53,6 +55,7 @@ export const BooksController = {
     }
   },
 
+  // actualiza datos de libro
   update: async (req, res) => {
     try {
       const { bookId } = req.params
@@ -65,6 +68,7 @@ export const BooksController = {
     }
   },
 
+  // borra libro de la base de datos
   delete: async (req, res) => {
     try {
       const { bookId } = req.params;

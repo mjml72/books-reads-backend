@@ -3,9 +3,10 @@ import { NotesModel } from '../models/notes.model.js';
 
 
 export const NotesController = {
+  // busqueda de notas de libro por id del libro
   findByBookId: async (req, res) => {
     try {
-      const { bookId, userId } = req.params;
+      const { userId, bookId } = req.params;
       const response = await NotesModel.findByBookId(bookId, userId);
 
       if (!response) {
@@ -17,6 +18,8 @@ export const NotesController = {
       return res.status(500).send(error.message);
     }
   },
+
+  // busqueda de nota por id
   findById: async (req, res) => {
     try {
       const { noteId } = req.params;
@@ -33,6 +36,7 @@ export const NotesController = {
   },
 
 
+  // crea notas nuevas de libro
   create: async (req, res) => {
     try {
       const { text, created, book_id, user_id } = req.body;
@@ -43,6 +47,7 @@ export const NotesController = {
     }
   },
 
+  // actualiza datos de nota
   update: async (req, res) => {
     try {
       const { noteId } = req.params;
@@ -55,6 +60,7 @@ export const NotesController = {
     }
   },
 
+  // borra nota de libro de la base de datos
   delete: async (req, res) => {
     try {
       const { noteId } = req.params;

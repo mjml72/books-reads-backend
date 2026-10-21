@@ -4,7 +4,7 @@ import { BookStatusModel } from '../models/bookstatus.model.js';
 
 export const BookStatusController = {
 
-
+  // busqueda de status de libro por id de libro, id de usuario
   findById: async (req, res) => {
     try {
       const { userId, bookId } = req.params;
@@ -20,10 +20,10 @@ export const BookStatusController = {
     }
   },
 
-
+  // crea nuevo status de libro
   create: async (req, res) => {
     try {
-      const { user_id, book_id, progress, status, rating, start_reading, end_reading} = req.body;
+      const { user_id, book_id, progress, status, rating, start_reading, end_reading } = req.body;
       const response = await BookStatusModel.create(user_id, book_id, progress, status, rating, start_reading, end_reading);
       return res.status(201).json(response);
     } catch (error) {
@@ -31,9 +31,10 @@ export const BookStatusController = {
     }
   },
 
+  // actualiza datos de status de libro
   update: async (req, res) => {
     try {
-      const { userId, bookId} = req.params
+      const { userId, bookId } = req.params
       const { progress, status, rating, start_reading, end_reading } = req.body;
       const response = await BookStatusModel.update(userId, bookId, progress, status, rating, start_reading, end_reading);
       return res.status(200).json(response);
@@ -43,6 +44,7 @@ export const BookStatusController = {
     }
   },
 
+  // borra datos del status del libro de la base de datos
   delete: async (req, res) => {
     try {
       const { userId, bookId } = req.params;

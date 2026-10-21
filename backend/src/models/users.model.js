@@ -13,14 +13,16 @@ export const UsersModel = {
     return await db.get('SELECT * FROM Users WHERE user_id = ?', [id]);
   },
 
-  findByName: async (name) => {
-    return await db.all('SELECT * FROM Users WHERE name LIKE ?', [`%${name}%`]);
+
+  findByEmail: async (email) => {
+    return await db.get('SELECT * FROM Users WHERE email = ?',
+      [email]);
   },
 
-  create: async (name, email, password) => {
+  create: async (name, email, hashedPassword) => {
     return await db.run(
       'INSERT INTO Users (name, email, password) VALUES (?,?,?)',
-      [name, email, password]
+      [name, email, hashedPassword]
     );
   },
 
