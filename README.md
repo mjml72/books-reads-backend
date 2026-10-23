@@ -1,6 +1,7 @@
 
 
-API RESTful construida con Node.js Express. Utiliza SQLite como motor de base de datos mediante consultas SQL puras, implementando prácticas de seguridad contra inyecciones SQL.
+Este proyecto contiene el diseño de la base datos con el diagrama entidad relación DER, el código sql de DDL además de DML de prueba, la API REST construida con Node.js Express. Utiliza SQLite como motor de base de datos mediante consultas SQL puras, implementando prácticas de seguridad contra inyecciones SQL. Está construida para aplicacion de gestión de lectura.
+
 
 Tecnologías Utilizadas
 
